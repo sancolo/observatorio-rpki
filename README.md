@@ -2,8 +2,7 @@
 
 Pipeline automatizado que cruza diariamente la tabla de enrutamiento BGP global contra la base de Autorizaciones de Origen de Rutas (ROAs) validada criptográficamente, implementando el algoritmo de Validación de Origen de Rutas (ROV) definido en el **RFC 6811**.
 
-> Trabajo de investigación — Universidad Tecnológica Nacional, Facultad Regional Bahía Blanca.  
-> Paper de referencia: *"Observatorio de Seguridad del Enrutamiento Global: Análisis de la Adopción de RPKI mediante Validación de Origen de Rutas a Escala de Internet"*
+> Trabajo de investigación — Universidad Tecnológica Nacional, Facultad Regional Bahía Blanca.
 
 ---
 
@@ -170,15 +169,6 @@ python3 analisis_cientifico.py <internet_enriquecida.csv> <top10.csv> <FECHA> <p
 
 # Paso 4: Generación de figuras
 python3 graficar_riesgo_discreto.py <vrps_procesados.csv> <base_graficos> <FECHA> <pushgateway>
-```
-
-### Completar el paper con datos reales
-
-```bash
-# Llena los placeholders [PCT_VALID], [TOTAL_PREFIJOS], etc. del paper
-python3 completar_paper.py
-# Lee: internet_enriquecida_rpki.csv, vrps_procesados_para_grafico.csv, top_10_infractores.csv
-# Genera: paper_rpki_completo.md
 ```
 
 ---
