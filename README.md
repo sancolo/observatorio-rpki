@@ -14,7 +14,6 @@ Pipeline automatizado que cruza diariamente la tabla de enrutamiento BGP global 
 4. **Analiza** la distribución de ROAs holgados (*Loose ROAs*, [RFC 9319](https://www.rfc-editor.org/rfc/rfc9319)) por Registro Regional de Internet (RIR).
 5. **Identifica** los 10 ASNs con mayor cantidad de prefijos inválidos por Origin Mismatch, enriquecidos con datos de organización de PeeringDB.
 6. **Exporta** métricas a Prometheus Pushgateway para visualización en Grafana (dashboards incluidos).
-7. **Genera** figuras científicas: violin plots, heatmaps e histogramas de distribución de prefijos.
 
 ---
 
@@ -46,13 +45,10 @@ RouteViews MRT (.bz2)
    top_10_infractores.csv    vrps_procesados.csv
                                          │
                                          ▼
-                             graficar_riesgo_discreto.py
+                               metricas_roas.py
                                          │
                                          ▼
-                   violin_ipv4/ipv6.png, heatmap_ipv4/ipv6.png
-                   hist_preflen_ipv4/ipv6.png, hist_maxlen_ipv4/ipv6.png
-
-Todos los pasos → Prometheus Pushgateway → Grafana
+                            Prometheus Pushgateway → Grafana
 ```
 
 ---
@@ -74,7 +70,7 @@ Todos los pasos → Prometheus Pushgateway → Grafana
 pip install -r requirements.txt
 ```
 
-Principales: `pandas`, `mrtparse`, `radix`, `prometheus-client`, `matplotlib`, `requests`.
+Principales: `pandas`, `mrtparse`, `radix`, `prometheus-client`, `requests`.
 
 ---
 
@@ -167,8 +163,8 @@ python3 analisis_roas.py <vrps.json> <salida.csv> <base_holgados>
 # Paso 3b: Hallazgos científicos (Top 10 Origin Mismatch + PeeringDB)
 python3 analisis_cientifico.py <internet_enriquecida.csv> <top10.csv> <FECHA> <pushgateway>
 
-# Paso 4: Generación de figuras
-python3 graficar_riesgo_discreto.py <vrps_procesados.csv> <base_graficos> <FECHA> <pushgateway>
+# Paso 4: Exportar métricas de ROAs a Prometheus
+python3 metricas_roas.py <vrps_procesados.csv> <FECHA> [pushgateway]
 ```
 
 ---
@@ -184,14 +180,6 @@ python3 graficar_riesgo_discreto.py <vrps_procesados.csv> <base_graficos> <FECHA
 | `roas_holgados_FECHA_ipv4.csv` | ROAs holgados IPv4 (Gap_Riesgo > 0) ordenados por gap desc |
 | `roas_holgados_FECHA_ipv6.csv` | ROAs holgados IPv6 (Gap_Riesgo > 0) ordenados por gap desc |
 | `top_10_infractores_FECHA.csv` | Top 10 ASNs por Origin Mismatch con nombre de organización |
-| `distribucion_loose_roas_FECHA_violin_ipv4.png` | Violin plot del gap de riesgo por RIR — IPv4 |
-| `distribucion_loose_roas_FECHA_violin_ipv6.png` | Violin plot del gap de riesgo por RIR — IPv6 |
-| `distribucion_loose_roas_FECHA_heatmap_ipv4.png` | Heatmap gap × RIR (escala log) — IPv4 |
-| `distribucion_loose_roas_FECHA_heatmap_ipv6.png` | Heatmap gap × RIR (escala log) — IPv6 |
-| `distribucion_loose_roas_FECHA_hist_preflen_ipv4.png` | Histograma de longitudes de prefijo por RIR — IPv4 |
-| `distribucion_loose_roas_FECHA_hist_preflen_ipv6.png` | Histograma de longitudes de prefijo por RIR — IPv6 |
-| `distribucion_loose_roas_FECHA_hist_maxlen_ipv4.png` | Histograma de maxLength por RIR — IPv4 |
-| `distribucion_loose_roas_FECHA_hist_maxlen_ipv6.png` | Histograma de maxLength por RIR — IPv6 |
 
 ---
 
