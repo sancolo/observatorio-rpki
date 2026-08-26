@@ -127,7 +127,24 @@ fi
 echo "[1/4] RIB descargado correctamente ($(( FILESIZE / 1048576 )) MB)." | tee -a $LOG_FILE
 
 echo "[1/4] Extrayendo VRPs desde el validador RPKI local..." | tee -a $LOG_FILE
-curl -sf "$ROUTINATOR_API/json" -o $JSON_ROAS
+VRP_HTTP=$(curl -s -o "$JSON_ROAS" \
+    --connect-timeout 30 --max-time 300 \
+    -w "%{http_code}" \
+    "$ROUTINATOR_API/json" 2>>"$LOG_FILE") || true
+echo "[1/4] Routinator HTTP $VRP_HTTP | $(wc -c < "$JSON_ROAS" 2>/dev/null || echo 0) bytes" | tee -a "$LOG_FILE"
+if [ "$VRP_HTTP" != "200" ]; then
+    echo "[ERROR] No se pudo obtener VRPs de Routinator (HTTP $VRP_HTTP). ¿Está corriendo el servicio?" | tee -a "$LOG_FILE"
+    echo "        Verificar con: systemctl status routinator  |  curl $ROUTINATOR_API/json" | tee -a "$LOG_FILE"
+    rm -f "$JSON_ROAS"
+    exit 1
+fi
+VRP_SIZE=$(wc -c < "$JSON_ROAS")
+if [ "$VRP_SIZE" -lt 10240 ]; then
+    echo "[ERROR] Archivo VRP demasiado pequeño (${VRP_SIZE} bytes). Routinator puede estar inicializando." | tee -a "$LOG_FILE"
+    rm -f "$JSON_ROAS"
+    exit 1
+fi
+echo "[1/4] VRPs extraídos correctamente ($(( VRP_SIZE / 1024 )) KB)." | tee -a "$LOG_FILE"
 
 # --- 2. Procesamiento ---
 echo "[2/4] Decodificando MRT binario a CSV..." | tee -a $LOG_FILE
