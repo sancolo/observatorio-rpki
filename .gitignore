@@ -1,0 +1,36 @@
+# Datos crudos y procesados (voluminosos, no versionar)
+*.bz2
+*.csv
+*.json
+!grafana/*.json
+
+# Figuras generadas (reproducibles desde el pipeline)
+*.png
+*.pdf
+
+# Logs del pipeline
+logs/
+*.log
+
+# Directorios de trabajo
+datos_crudos/
+datos_procesados*/
+__pycache__/
+*.pyc
+*.pyo
+
+# Entorno virtual Python
+venv/
+.venv/
+env/
+
+# Editores e IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

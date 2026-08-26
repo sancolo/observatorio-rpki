@@ -1,0 +1,14 @@
+# Nota: el parseo de archivos MRT requiere bgpdump (paquete del sistema, no PyPI)
+# Instalación: sudo apt install bgpdump
+# Manipulación de datos y estadísticas
+pandas==2.2.1
+# Árboles Radix en C para búsqueda de subredes ultrarrápida (py-radix es compatible con Python 3.11+)
+py-radix==0.10.0
+# Cliente de Prometheus para enviar métricas al dashboard
+prometheus-client==0.20.0
+# Consultas HTTP a la API de PeeringDB
+requests==2.31.0
+# Visualización científica (gráficos para el paper)
+matplotlib==3.8.4
+seaborn==0.13.2
+
