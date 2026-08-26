@@ -154,11 +154,11 @@ $PYTHON_ENV $WORKSPACE_DIR/procesar_mrt.py $MRT_FILE $CSV_BGP >> $LOG_FILE 2>&1
 echo "[3/4] Ejecutando cruce criptográfico (Árbol Radix RFC 6811)..." | tee -a $LOG_FILE
 $PYTHON_ENV $WORKSPACE_DIR/cruce_rpki_bgp.py $CSV_BGP $JSON_ROAS $CSV_ENRIQUECIDA $FECHA $PUSHGATEWAY $CSV_INVALIDOS >> $LOG_FILE 2>&1
 
-# --- 4. Análisis y visualización ---
+# --- 4. Análisis y métricas ---
 echo "[4/4] Generando hallazgos científicos y métricas..." | tee -a $LOG_FILE
 $PYTHON_ENV $WORKSPACE_DIR/analisis_roas.py $JSON_ROAS $CSV_VRPS_GRAFICO $BASE_HOLGADOS >> $LOG_FILE 2>&1
 $PYTHON_ENV $WORKSPACE_DIR/analisis_cientifico.py $CSV_ENRIQUECIDA $CSV_TOP10 $FECHA $PUSHGATEWAY >> $LOG_FILE 2>&1
-$PYTHON_ENV $WORKSPACE_DIR/graficar_riesgo_discreto.py $CSV_VRPS_GRAFICO $BASE_GRAFICOS $FECHA $PUSHGATEWAY >> $LOG_FILE 2>&1
+$PYTHON_ENV $WORKSPACE_DIR/metricas_roas.py $CSV_VRPS_GRAFICO $FECHA $PUSHGATEWAY >> $LOG_FILE 2>&1
 
 # --- 5. Limpieza de archivos locales ---
 echo "[Limpieza] Rotando archivos crudos voluminosos..." | tee -a $LOG_FILE
