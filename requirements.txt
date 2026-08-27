@@ -9,6 +9,9 @@ py-radix==0.10.0
 prometheus-client==0.20.0
 # Consultas HTTP a la API de PeeringDB
 requests==2.31.0
+# Visualización científica (figuras del pipeline)
+matplotlib==3.8.4
+seaborn==0.13.2
 # Visualización científica (gráficos para el paper)
 matplotlib==3.8.4
 seaborn==0.13.2

@@ -45,10 +45,10 @@ RouteViews MRT (.bz2)
    top_10_infractores.csv    vrps_procesados.csv
                                          │
                                          ▼
-                               metricas_roas.py
-                                         │
-                                         ▼
-                            Prometheus Pushgateway → Grafana
+                           graficar_riesgo_discreto.py
+                           ├── violín / heatmap / histogramas (.png)
+                           ├── histogramas por RIR (.csv)
+                           └── Prometheus Pushgateway → Grafana
 ```
 
 ---
@@ -163,8 +163,11 @@ python3 analisis_roas.py <vrps.json> <salida.csv> <base_holgados>
 # Paso 3b: Hallazgos científicos (Top 10 Origin Mismatch + PeeringDB)
 python3 analisis_cientifico.py <internet_enriquecida.csv> <top10.csv> <FECHA> <pushgateway>
 
-# Paso 4: Exportar métricas de ROAs a Prometheus
-python3 metricas_roas.py <vrps_procesados.csv> <FECHA> [pushgateway]
+# Paso 4: Generar figuras y exportar métricas a Prometheus
+python3 graficar_riesgo_discreto.py <vrps_procesados.csv> <base_salida> <FECHA> [pushgateway]
+
+# Alternativa sin matplotlib (solo métricas Prometheus, sin figuras):
+# python3 metricas_roas.py <vrps_procesados.csv> <FECHA> [pushgateway]
 ```
 
 ---

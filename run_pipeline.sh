@@ -159,7 +159,7 @@ $PYTHON_ENV $WORKSPACE_DIR/cruce_rpki_bgp.py $CSV_BGP $JSON_ROAS $CSV_ENRIQUECID
 echo "[4/4] Generando hallazgos científicos y métricas..." | tee -a $LOG_FILE
 $PYTHON_ENV $WORKSPACE_DIR/analisis_roas.py $JSON_ROAS $CSV_VRPS_GRAFICO $BASE_HOLGADOS >> $LOG_FILE 2>&1
 $PYTHON_ENV $WORKSPACE_DIR/analisis_cientifico.py $CSV_ENRIQUECIDA $CSV_TOP10 $FECHA $PUSHGATEWAY >> $LOG_FILE 2>&1
-$PYTHON_ENV $WORKSPACE_DIR/metricas_roas.py $CSV_VRPS_GRAFICO $FECHA $PUSHGATEWAY >> $LOG_FILE 2>&1
+$PYTHON_ENV $WORKSPACE_DIR/graficar_riesgo_discreto.py $CSV_VRPS_GRAFICO $BASE_GRAFICOS $FECHA $PUSHGATEWAY >> $LOG_FILE 2>&1
 
 # --- 5. Limpieza de archivos locales ---
 echo "[Limpieza] Rotando archivos crudos voluminosos..." | tee -a $LOG_FILE
