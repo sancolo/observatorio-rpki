@@ -1,4 +1,5 @@
 #!/bin/bash
+# Observatorio RPKI — https://github.com/sancolo/observatorio-rpki
 # Ejecución automática de un snapshot del Observatorio RPKI.
 #
 # Uso:

@@ -99,7 +99,7 @@ curl http://127.0.0.1:8323/json -o vrps.json
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/[USUARIO]/observatorio-rpki.git
+git clone https://github.com/sancolo/observatorio-rpki.git
 cd observatorio-rpki
 
 # 2. Crear entorno virtual e instalar dependencias
@@ -225,7 +225,7 @@ El cruce BGP × RPKI sigue exactamente el procedimiento del RFC 6811, usando un 
   author  = {[NOMBRE APELLIDO]},
   institution = {Universidad Tecnológica Nacional -- Facultad Regional Bahía Blanca},
   year    = {2026},
-  url     = {https://github.com/[USUARIO]/observatorio-rpki}
+  url     = {https://github.com/sancolo/observatorio-rpki}
 }
 ```
 

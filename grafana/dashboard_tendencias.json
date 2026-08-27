@@ -10,7 +10,7 @@
     }
   ],
   "title": "RPKI Observatory — Tendencias",
-  "description": "Evolución temporal de métricas RPKI. Longitudes en formato 3 dígitos: 008=/8, 024=/24, 048=/48, 128=/128.",
+  "description": "Observatorio RPKI — Evolución temporal de métricas RPKI. Longitudes en formato 3 dígitos: 008=/8, 024=/24, 048=/48, 128=/128.",
   "uid": "rpki-tendencias",
   "schemaVersion": 38,
   "version": 2,

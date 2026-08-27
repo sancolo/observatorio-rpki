@@ -1,3 +1,4 @@
+# Observatorio RPKI — dependencias Python
 # Nota: el parseo de archivos MRT requiere bgpdump (paquete del sistema, no PyPI)
 # Instalación: sudo apt install bgpdump
 # Manipulación de datos y estadísticas

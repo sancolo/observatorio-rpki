@@ -53,6 +53,7 @@
     }
   ],
   "title": "Observatorio RPKI",
+  "description": "Estado del enrutamiento global: estados BGP×RPKI, Top 10 ASNs con Origin Mismatch, distribución por RIR.",
   "uid": "observatorio-rpki-utn",
   "schemaVersion": 38,
   "version": 1,
